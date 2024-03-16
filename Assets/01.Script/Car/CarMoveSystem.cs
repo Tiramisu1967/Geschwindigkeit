@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Windows;
 
 [Serializable]
 public class WheelInfo
@@ -27,12 +28,15 @@ public class CarMoveSystem : MonoBehaviour
         rb.centerOfMass = center.localPosition;
     }
 
+    public void FixedUpdate()
+    {
+
+        MoveWheel(MaxMotor * UnityEngine.Input.GetAxis("Vertical"), MaxSteer * UnityEngine.Input.GetAxis("Horizontal"), false);
+    }
 
     public void MoveWheel(float moterTorque, float steer, bool bIsBreak)
     {
-        moterTorque = MaxMotor;
-        steer = MaxSteer;
-
+        Debug.Log("ddddddddd");
         foreach (var wheel in WheelInfo)
         {
             if (wheel.Motor)

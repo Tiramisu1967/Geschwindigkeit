@@ -8,5 +8,6 @@ public class GameInstance : MonoBehaviour
     public int Coin;
     public float RacingTime;
     public float Score;
+    public int CurrentWayPointCount;
 
 }

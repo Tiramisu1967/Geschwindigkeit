@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameManager gameManager;
+    public GameObject PlayerPoint; 
 
 }
