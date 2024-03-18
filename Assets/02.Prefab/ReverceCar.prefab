@@ -2417,8 +2417,8 @@ MonoBehaviour:
     steering: 1
   - leftWheel: {fileID: 3689056854839207067}
     rightWheel: {fileID: 34439465499153087}
-    motor: 0
-    steering: 1
+    motor: 1
+    steering: 0
   maxMotorTorque: 2000
   maxSteeringAngle: 20
   BreakForce: 20000

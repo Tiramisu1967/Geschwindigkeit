@@ -1,33 +1,33 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ForwardCar : BaseCar
 {
-    private float Tmp;
+    public float playerTargetDistance = 10f; // 플레이어를 향해 돌진하기 시작하는 거리
+
+    // Movement 메서드를 오버라이드하여 플레이어를 향해 돌진하는 기능 추가
     public override void Movement()
     {
-        if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
-        if (Vector3.Distance(TargetPoint.position, transform.position) <= 10 && WayPoints.childCount > WayIndex + 1)
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
         {
-            Debug.Log(WayIndex);
-            
-            WayIndex++;
-            if (WayPoints.childCount == WayIndex)
+            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+
+            // 설정한 거리보다 가까우면 플레이어 쪽으로 이동
+            if (distanceToPlayer < playerTargetDistance)
             {
-                WayIndex = 0;
+                Vector3 playerDirection = (player.transform.position - transform.position).normalized;
+                transform.position += playerDirection * Time.deltaTime * maxMotorTorque;
             }
-            TargetPoint = WayPoints.GetChild(WayIndex);
+            else
+            {
+                // 설정한 거리보다 멀면 기존의 웨이포인트 방향으로 이동
+                base.Movement();
+            }
         }
-        if (Tmp <= 100000)
+        else
         {
-            rb.AddForce(rb.transform.forward * 200, ForceMode.Impulse);
-            Tmp += 200;
+            // 플레이어를 찾지 못한 경우에는 웨이포인트 방향으로 이동
+            base.Movement();
         }
-        Vector3 waypointRelativeDistance = transform.InverseTransformPoint(TargetPoint.position);
-        waypointRelativeDistance /= waypointRelativeDistance.magnitude;
-        steering = (waypointRelativeDistance.x / waypointRelativeDistance.magnitude) * 25;
-        base.Movement();
     }
 }

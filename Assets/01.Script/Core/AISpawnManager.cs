@@ -82,7 +82,7 @@ public class AISpawnManager : MonoBehaviour
         {
             GameObject AI = Instantiate(ForwardCarPrefab, WayPoints[SpawnWaypoint].transform.position, Quaternion.identity);
             AI.gameObject.GetComponent<BaseCar>().WayIndex = SpawnWaypoint;
-            Destroy(AI, 5);
+            Destroy(AI, 15);
         }
     }
 }
