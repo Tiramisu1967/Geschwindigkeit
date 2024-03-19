@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject PlayerPoint;
-
     public void NextMap()
     {
         if(GameInstance.instance.Stage < 3)

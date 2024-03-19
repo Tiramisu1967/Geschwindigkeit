@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 411316293}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 488, y: 451, z: 5.8307867}
+  m_LocalPosition: {x: -865, y: 451, z: 5.8307867}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 1590616424}
   - component: {fileID: 1590616423}
   - component: {fileID: 1590616425}
+  - component: {fileID: 1590616426}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -599,6 +600,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RacingTimeText: {fileID: 1848794186}
   LabText: {fileID: 1007253298}
+--- !u!114 &1590616426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590616422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d73be0d7e7270dd4d9187582266e7615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1597177151
 GameObject:
   m_ObjectHideFlags: 0
@@ -914,7 +927,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1662, y: -168}
+  m_AnchoredPosition: {x: 309, y: -168}
   m_SizeDelta: {x: 400, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1848794186
@@ -1181,37 +1194,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &2103977768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2103977769}
-  m_Layer: 0
-  m_Name: Waypoint (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2103977769
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103977768}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.8, y: 0, z: -113.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1068249091}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1078597030710644930
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1220,18 +1202,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1198840183543783123, guid: f4c4cd355d5a90e4bbdd86d695f2a6c8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3701730031656093051, guid: f4c4cd355d5a90e4bbdd86d695f2a6c8, type: 3}
       propertyPath: WayPoints
       value: 
       objectReference: {fileID: 1068249091}
-    - target: {fileID: 3701730031656093051, guid: f4c4cd355d5a90e4bbdd86d695f2a6c8, type: 3}
-      propertyPath: maxMotorTorque
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 4057584064399790917, guid: f4c4cd355d5a90e4bbdd86d695f2a6c8, type: 3}
       propertyPath: Waypoints.Array.data[0]
       value: 
@@ -1296,8 +1270,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCar
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2630762813576439359, guid: f4c4cd355d5a90e4bbdd86d695f2a6c8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1350,48 +1323,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4205333604036653801, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 98.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4205333604036653801, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -51.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4693711222100315025, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 83.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 5254721684082748027, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -116.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5254721684082748027, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -45.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6311197648265981579, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
       propertyPath: m_Name
       value: Waypoint
       objectReference: {fileID: 0}
-    - target: {fileID: 6789379910473128792, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 86.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7948779374231626658, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 28.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7948779374231626658, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 108.3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 2904428031447174855, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2103977769}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
 --- !u!1660057539 &9223372036854775807

@@ -48,20 +48,6 @@ public class BaseCar : MonoBehaviour
         {
             return;
         }
-        if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
-        if (Vector3.Distance(TargetPoint.position, transform.position) <= 20 && WayPoints.childCount > WayIndex + 1)
-        {
-            Debug.Log(WayIndex);
-            WayIndex++;
-            TargetPoint = WayPoints.GetChild(WayIndex);
-
-            if (WayPoints.childCount == WayIndex + 1)
-            {
-                GameInstance.instance._IsTurn = true;
-                WayIndex = 0;
-                TargetPoint = WayPoints.GetChild(WayIndex); 
-            }
-        }
 
         Transform visualWheel = collider.transform.GetChild(0);
 
