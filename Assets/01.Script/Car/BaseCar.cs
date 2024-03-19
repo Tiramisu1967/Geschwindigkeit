@@ -24,11 +24,11 @@ public class BaseCar : MonoBehaviour
 
     public Transform WayPoints;
     public Transform TargetPoint;
-    [HideInInspector] public int WayIndex = 0;
+    public int WayIndex = 0;
 
     [HideInInspector] public Rigidbody rb;
 
-    public float motor = 1000;
+    [HideInInspector] public float motor = 1000;
     [HideInInspector] public float steering = 0;
     [HideInInspector] public float Break = 0;
 
@@ -42,11 +42,25 @@ public class BaseCar : MonoBehaviour
     }
     // finds the corresponding visual wheel
     // correctly applies the transform
-    public void LocalPosition(WheelCollider collider)
+    public virtual void LocalPosition(WheelCollider collider)
     {
         if (collider.transform.childCount == 0)
         {
             return;
+        }
+        if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
+        if (Vector3.Distance(TargetPoint.position, transform.position) <= 20 && WayPoints.childCount > WayIndex + 1)
+        {
+            Debug.Log(WayIndex);
+            WayIndex++;
+            TargetPoint = WayPoints.GetChild(WayIndex);
+
+            if (WayPoints.childCount == WayIndex + 1)
+            {
+                GameInstance.instance._IsTurn = true;
+                WayIndex = 0;
+                TargetPoint = WayPoints.GetChild(WayIndex); 
+            }
         }
 
         Transform visualWheel = collider.transform.GetChild(0);

@@ -12,4 +12,41 @@ public class CarMoveSystem : BaseCar
         base.Movement();
     }
 
+    public override void LocalPosition(WheelCollider collider)
+    {
+        if (collider.transform.childCount == 0)
+        {
+            return;
+        }
+        if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
+        if (Vector3.Distance(TargetPoint.position, transform.position) <= 25 && WayPoints.childCount > WayIndex + 1)
+        {
+            Debug.Log(WayIndex);
+            WayIndex++;
+            TargetPoint = WayPoints.GetChild(WayIndex);
+
+            if (WayPoints.childCount == WayIndex + 1)
+            {
+                GameInstance.instance._IsTurn = true;
+                WayIndex = 0;
+                TargetPoint = WayPoints.GetChild(WayIndex);
+            }
+        }
+        base.LocalPosition(collider);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("EndLine") && GameInstance.instance._IsTurn)
+        {
+            GameInstance.instance.LabCount += 1;
+            GameInstance.instance._IsTurn = false;
+            if(GameInstance.instance.LabCount == GameInstance.instance.MaxLab[GameInstance.instance.Stage -1])
+            {
+                GameManager gameManager = FindAnyObjectByType<GameManager>();
+                gameManager.NextMap();
+            }
+        }
+    }
+
 }

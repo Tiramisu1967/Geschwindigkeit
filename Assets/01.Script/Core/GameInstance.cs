@@ -6,10 +6,14 @@ public class GameInstance : MonoBehaviour
 {
     public static GameInstance instance;
     public int Coin;
+    public int Stage;
     public float RacingTime;
     public float Score;
     public GameObject[] Waypoint;
     public int CurrentWayPointCount = 0;
+    public int LabCount;
+    public int[] MaxLab;
+    public bool _IsTurn;
 
 
     private void Awake()
@@ -23,6 +27,11 @@ public class GameInstance : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Update()
+    {
+        RacingTime += Time.deltaTime;
     }
 
 }
