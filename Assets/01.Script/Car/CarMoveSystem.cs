@@ -1,9 +1,11 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Windows;
 
 public class CarMoveSystem : BaseCar
 {
+
    public override void Movement()
     {
         motor = maxMotorTorque * UnityEngine.Input.GetAxis("Vertical");
@@ -32,6 +34,7 @@ public class CarMoveSystem : BaseCar
                 TargetPoint = WayPoints.GetChild(WayIndex);
             }
         }
+        GameInstance.instance.Speed = rb.velocity.magnitude * 3.6f;
         base.LocalPosition(collider);
     }
 

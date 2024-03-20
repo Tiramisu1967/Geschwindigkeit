@@ -12,6 +12,7 @@ public class GameInstance : MonoBehaviour
     public GameObject[] Waypoint;
     public int CurrentWayPointCount = 0;
     public int LabCount;
+    public float Speed;
     public int[] MaxLab;
     public bool _IsTurn;
 

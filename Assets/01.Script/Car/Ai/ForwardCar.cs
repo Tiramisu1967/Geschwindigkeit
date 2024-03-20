@@ -8,26 +8,27 @@ public class ForwardCar : BaseCar
     public override void Movement()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
 
-            // 설정한 거리보다 가까우면 플레이어 쪽으로 이동
-            if (distanceToPlayer < playerTargetDistance)
-            {
-                Vector3 playerDirection = (player.transform.position - transform.position).normalized;
-                transform.position += playerDirection * Time.deltaTime * maxMotorTorque;
-            }
-            else
-            {
-                // 설정한 거리보다 멀면 기존의 웨이포인트 방향으로 이동
-                base.Movement();
-            }
-        }
-        else
+        if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
+        if(Vector3.Distance(player.transform.position, transform.position) <= 100)
         {
-            // 플레이어를 찾지 못한 경우에는 웨이포인트 방향으로 이동
-            base.Movement();
+            TargetPoint = player.transform;
         }
+        else if (Vector3.Distance(TargetPoint.position, transform.position) <= 10)
+        {
+            Debug.Log(WayIndex);
+            WayIndex++;
+
+            if (WayPoints.childCount == WayIndex)
+            {
+                WayIndex = 0;
+                TargetPoint = WayPoints.GetChild(0);
+            }
+            TargetPoint = WayPoints.GetChild(WayIndex);
+        }
+        Vector3 waypointRelativeDistance = transform.InverseTransformPoint(TargetPoint.position);
+        waypointRelativeDistance /= waypointRelativeDistance.magnitude;
+        steering = (waypointRelativeDistance.x / waypointRelativeDistance.magnitude) * 25;
+        base.Movement();
     }
 }

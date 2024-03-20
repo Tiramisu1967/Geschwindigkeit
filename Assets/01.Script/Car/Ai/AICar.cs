@@ -9,7 +9,7 @@ public class AICar : BaseCar
     public override void Movement()
     {
         if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
-        if (Vector3.Distance(TargetPoint.position, transform.position) <= 10 && WayPoints.childCount > WayIndex + 1)
+        if (Vector3.Distance(TargetPoint.position, transform.position) <= 10)
         {
             Debug.Log(WayIndex);
             WayIndex++;

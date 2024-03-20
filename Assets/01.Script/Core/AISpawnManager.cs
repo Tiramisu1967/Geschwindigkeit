@@ -4,6 +4,8 @@ public class AISpawnManager : MonoBehaviour
 {
     public GameObject ForwardCarPrefab;
     public GameObject ReverceCarPrefab;
+    public GameObject Warning;
+    public GameObject WarningPoint;
     public GameObject[] WayPoints;
     public int SpawnWaypoint;
     public float SpawnCoolTime;
@@ -22,7 +24,7 @@ public class AISpawnManager : MonoBehaviour
         }
     }
 
-    void Spawn()
+    void SpawnPoints()
     {
         int Current = Random.Range(0, 2);
         switch (Current)
@@ -44,12 +46,12 @@ public class AISpawnManager : MonoBehaviour
             Debug.Log("?????");
 
         }
-        SpawnWaypoint = GameInstance.instance.CurrentWayPointCount + 2;
+        SpawnWaypoint = GameInstance.instance.CurrentWayPointCount + 1;
         if(SpawnWaypoint >= WayPoints.Length)
         {
             SpawnWaypoint -= WayPoints.Length;
         }
-        Reverse();
+        Spawn();
     }
 
     void ForwardWaypoint()
@@ -59,30 +61,24 @@ public class AISpawnManager : MonoBehaviour
             Debug.Log("?????");
 
         }
-        SpawnWaypoint = GameInstance.instance.CurrentWayPointCount - 2;
+        SpawnWaypoint = GameInstance.instance.CurrentWayPointCount - 1;
         if (SpawnWaypoint < 0)
         {
-            SpawnWaypoint = WayPoints.Length - 2;
+            SpawnWaypoint = WayPoints.Length - 1;
         }
-        Forward();
+        Spawn();
     }
-    void Reverse()
+    void Spawn()
     {
         if (WayPoints[SpawnWaypoint] != null)
         {
+            GameObject WarningImage = Instantiate(Warning, WarningPoint.transform.position, Quaternion.identity);
             GameObject AI = Instantiate(ReverceCarPrefab, WayPoints[SpawnWaypoint].transform.position, Quaternion.identity);
             AI.gameObject.GetComponent<BaseCar>().WayIndex = SpawnWaypoint;
+            WarningImage.GetComponent<WarningSystem>().WarningTarget = AI;
+            WarningImage.GetComponent<WarningSystem>().WarningFloow = WarningPoint;
             Destroy(AI, 5);
         }
     }
 
-    void Forward()
-    {
-        if (WayPoints[SpawnWaypoint] != null)
-        {
-            GameObject AI = Instantiate(ForwardCarPrefab, WayPoints[SpawnWaypoint].transform.position, Quaternion.identity);
-            AI.gameObject.GetComponent<BaseCar>().WayIndex = SpawnWaypoint;
-            Destroy(AI, 15);
-        }
-    }
 }
