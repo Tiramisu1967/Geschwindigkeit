@@ -15,7 +15,7 @@ public class AICar : BaseCar
             Debug.Log(WayIndex);
             WayIndex++;
 
-            if (WayPoints.childCount == WayIndex)
+            if (WayPoints.childCount == WayIndex -1)
             {
                 WayIndex = 0;
                 TargetPoint = WayPoints.GetChild(0);

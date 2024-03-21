@@ -5,13 +5,31 @@ using UnityEngine.Windows;
 
 public class CarMoveSystem : BaseCar
 {
-
+    [HideInInspector] public bool isSlow = false;
    public override void Movement()
     {
-        motor = maxMotorTorque * UnityEngine.Input.GetAxis("Vertical");
+        if (!isSlow)
+        {
+            motor = maxSteeringAngle * UnityEngine.Input.GetAxis("Horizontal") * 0.000005f;
+        }else
+        {
+            motor = maxMotorTorque * UnityEngine.Input.GetAxis("Vertical");
+        }
         steering = maxSteeringAngle * UnityEngine.Input.GetAxis("Horizontal");
         Break = UnityEngine.Input.GetKey(KeyCode.Space) ? BreakForce : 0;
         base.Movement();
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Rode"))
+        {
+            Debug.Log("¿À...µÈ´Ù");
+            isSlow = true;
+        } else
+        {
+            isSlow = false;
+        }
     }
 
     public override void LocalPosition(WheelCollider collider)
@@ -36,20 +54,6 @@ public class CarMoveSystem : BaseCar
         }
         GameInstance.instance.Speed = rb.velocity.magnitude * 3.6f;
         base.LocalPosition(collider);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("EndLine") && GameInstance.instance._IsTurn)
-        {
-            GameInstance.instance.LabCount += 1;
-            GameInstance.instance._IsTurn = false;
-            if(GameInstance.instance.LabCount == GameInstance.instance.MaxLab[GameInstance.instance.Stage -1])
-            {
-                GameManager gameManager = FindAnyObjectByType<GameManager>();
-                gameManager.NextMap();
-            }
-        }
     }
 
 }

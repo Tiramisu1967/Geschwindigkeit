@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - AIPlayer
+  - EndLine
+  - Rode
   layers:
   - Default
   - TransparentFX

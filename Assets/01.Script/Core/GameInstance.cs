@@ -9,7 +9,6 @@ public class GameInstance : MonoBehaviour
     public int Stage;
     public float RacingTime;
     public float Score;
-    public GameObject[] Waypoint;
     public int CurrentWayPointCount = 0;
     public int LabCount;
     public float Speed;

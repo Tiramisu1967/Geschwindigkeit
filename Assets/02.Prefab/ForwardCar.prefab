@@ -2360,7 +2360,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.857699, y: 7.857699, z: 7.857699}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6757095485553051585}
@@ -2422,11 +2422,12 @@ MonoBehaviour:
   maxMotorTorque: 2000
   maxSteeringAngle: 20
   BreakForce: 20000
-  center: {fileID: 3558892750851243581}
   WayPoints: {fileID: 2904428031447174855, guid: 7bd6029e5e2a521468ec5a992450c807, type: 3}
   TargetPoint: {fileID: 0}
+  center: {fileID: 3558892750851243581}
   WayIndex: 0
   rb: {fileID: 0}
   motor: 1000
   steering: 0
   Break: 0
+  playerTargetDistance: 10
