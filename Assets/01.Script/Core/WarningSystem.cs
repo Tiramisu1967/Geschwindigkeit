@@ -11,8 +11,11 @@ public class WarningSystem : MonoBehaviour
         if (WarningTarget == null)
         {
             Destroy(this.gameObject);
-        }
+        } else
+        {
         transform.position = WarningFloow.transform.position;
         transform.LookAt(WarningTarget.transform);
+
+        }
     }
 }

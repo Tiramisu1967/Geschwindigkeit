@@ -10,7 +10,7 @@ public class ForwardCar : BaseCar
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (TargetPoint == null) TargetPoint = WayPoints.GetChild(WayIndex);
-        if(Vector3.Distance(player.transform.position, transform.position) <= 100)
+        if(Vector3.Distance(player.transform.position, transform.position) <= 150)
         {
             TargetPoint = player.transform;
         }

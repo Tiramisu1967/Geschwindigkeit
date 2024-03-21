@@ -16,7 +16,7 @@ public class AISpawnManager : MonoBehaviour
         if (CurrentSpawnTime <= 0)
         {
             CurrentSpawnTime = SpawnCoolTime;
-            Spawn();
+            SpawnPoints();
         }
         else
         {
@@ -51,7 +51,7 @@ public class AISpawnManager : MonoBehaviour
         {
             SpawnWaypoint -= WayPoints.Length;
         }
-        Spawn();
+        Spawn(ReverceCarPrefab);
     }
 
     void ForwardWaypoint()
@@ -66,14 +66,14 @@ public class AISpawnManager : MonoBehaviour
         {
             SpawnWaypoint = WayPoints.Length - 1;
         }
-        Spawn();
+        Spawn(ForwardCarPrefab);
     }
-    void Spawn()
+    void Spawn(GameObject Prefab)
     {
         if (WayPoints[SpawnWaypoint] != null)
         {
             GameObject WarningImage = Instantiate(Warning, WarningPoint.transform.position, Quaternion.identity);
-            GameObject AI = Instantiate(ReverceCarPrefab, WayPoints[SpawnWaypoint].transform.position, Quaternion.identity);
+            GameObject AI = Instantiate(Prefab, WayPoints[SpawnWaypoint].transform.position, Quaternion.identity);
             AI.gameObject.GetComponent<BaseCar>().WayIndex = SpawnWaypoint;
             WarningImage.GetComponent<WarningSystem>().WarningTarget = AI;
             WarningImage.GetComponent<WarningSystem>().WarningFloow = WarningPoint;

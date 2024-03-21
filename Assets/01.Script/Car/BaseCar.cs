@@ -20,10 +20,9 @@ public class BaseCar : MonoBehaviour
     public float maxSteeringAngle;
     public float BreakForce;
 
-    public Transform center;
-
     public Transform WayPoints;
     public Transform TargetPoint;
+    public Transform center;
     public int WayIndex = 0;
 
     [HideInInspector] public Rigidbody rb;
