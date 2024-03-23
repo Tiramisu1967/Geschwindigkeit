@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,13 @@ public class GameInstance : MonoBehaviour
     public int Coin;
     public int Stage;
     public float RacingTime;
-    public float Score;
     public int CurrentWayPointCount = 0;
     public int LabCount;
     public float Speed;
     public int[] MaxLab;
     public bool _IsTurn;
-
+    public bool isClear;
+    public int[] Part;
 
     private void Awake()
     {

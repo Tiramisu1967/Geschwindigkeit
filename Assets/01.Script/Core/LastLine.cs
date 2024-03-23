@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LastLine : MonoBehaviour
 {
-
+    public Canvas Shop;
     private int AILabCount;
     public void OnTriggerEnter(Collider other)
     {
@@ -16,9 +16,17 @@ public class LastLine : MonoBehaviour
             GameInstance.instance._IsTurn = false;
             if (GameInstance.instance.LabCount == GameInstance.instance.MaxLab[GameInstance.instance.Stage - 1])
             {
-                GameInstance.instance.LabCount = 0;
-                GameManager gameManager = FindAnyObjectByType<GameManager>();
-                gameManager.NextMap();
+                if(GameInstance.instance.Stage >= 3)
+                {
+                    SceneManager.LoadScene("Main");
+                }
+                else
+                {
+                    GameInstance.instance.isClear = true;
+                    GameInstance.instance.Stage++;
+                    Shop.gameObject.SetActive(true);
+                    GameInstance.instance.LabCount = 0;
+                }
             } 
         }
         else if (other.gameObject.CompareTag("AIPlayer"))
@@ -27,6 +35,9 @@ public class LastLine : MonoBehaviour
             {
                 GameInstance.instance.LabCount = 0;
                 SceneManager.LoadScene($"Stage{GameInstance.instance.Stage}");
+            } else
+            {
+                AILabCount += 1;
             }
         }
         else if(GameInstance.instance._IsTurn)

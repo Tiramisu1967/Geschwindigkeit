@@ -13,17 +13,11 @@ public class RacingManager : MonoBehaviour
 
     private List<RankingEntry> rankingEntries = new List<RankingEntry>();
     public TextMeshProUGUI[] Rankings = new TextMeshProUGUI[5];
-    public TextMeshProUGUI InitialInputFieldText;
 
     private string CurrentPlayerInitial;
 
     public void Start()
     {
-        if(InitialInputFieldText.text != null)
-        {
-        CurrentPlayerInitial = InitialInputFieldText.text;
-
-        }
 
         SetCurrentScore();
         SortRanking();
@@ -37,12 +31,7 @@ public class RacingManager : MonoBehaviour
         {
             float currentScore = PlayerPrefs.GetFloat(i + "BestScore");
 
-            string currentName = PlayerPrefs.GetString(i + "BestName");
-
-            if (currentName == "")
-                currentName = "---";
-
-            rankingEntries.Add(new RankingEntry(currentScore, currentName));
+            rankingEntries.Add(new RankingEntry(currentScore));
         }
 
         SortRanking();
@@ -51,7 +40,7 @@ public class RacingManager : MonoBehaviour
         {
             if (i < rankingEntries.Count)
             {
-                Rankings[i].text = $"{i + 1} {rankingEntries[i].Name} : {rankingEntries[i].Score}";
+                Rankings[i].text = $"{i + 1}  : {rankingEntries[i].Score}";
             }
             else
             {
@@ -66,21 +55,18 @@ public class RacingManager : MonoBehaviour
         for (int i = 0; i < 5; i++)
         {
             float currentScore = PlayerPrefs.GetFloat(i + "BestScore");
-            string currentName = PlayerPrefs.GetString(i + "BestName");
-            if (currentName == "")
-                currentName = "---";
 
-            rankingEntries.Add(new RankingEntry(currentScore, currentName));
+            rankingEntries.Add(new RankingEntry(currentScore));
         }
 
         // 현재 플레이어의 점수와 이름을 가져와 랭킹에 등록
-        float currentPlayerScore = GameInstance.instance.Score;
+        float currentPlayerScore = GameInstance.instance.RacingTime;
         string currentPlayerName = CurrentPlayerInitial;
 
         // 현재 플레이어의 점수가 랭킹에 등록 가능한지 확인
         if (IsScoreEligibleForRanking(currentPlayerScore))
         {
-            rankingEntries.Add(new RankingEntry(currentPlayerScore, currentPlayerName));
+            rankingEntries.Add(new RankingEntry(currentPlayerScore));
         }
     }
 
@@ -105,7 +91,7 @@ public class RacingManager : MonoBehaviour
         {
             if (i < rankingEntries.Count)
             {
-                Rankings[i].text = $"{i + 1} {rankingEntries[i].Name} : {rankingEntries[i].Score}";
+                Rankings[i].text = $"{i + 1}  : {rankingEntries[i].Score}";
             }
             else
             {
@@ -117,7 +103,6 @@ public class RacingManager : MonoBehaviour
         for (int i = 0; i < rankingEntries.Count; i++)
         {
             PlayerPrefs.SetFloat(i + "BestScore", rankingEntries[i].Score);
-            PlayerPrefs.SetString(i + "BestName", rankingEntries[i].Name);
         }
     }
 
@@ -129,7 +114,7 @@ public void GameStart()
             GameInstance.instance.CurrentWayPointCount = 0;
             GameInstance.instance.LabCount = 0;
             GameInstance.instance.RacingTime = 0;
-            GameInstance.instance.Score = 0;
+            GameInstance.instance.RacingTime = 0;
             GameInstance.instance.Stage = 1;
             GameInstance.instance._IsTurn = false;
         }
@@ -150,11 +135,9 @@ public void GameStart()
 public class RankingEntry
 {
     public float Score { get; set; }
-    public string Name { get; set; }
 
-    public RankingEntry(float score, string name)
+    public RankingEntry(float score)
     {
         Score = score;
-        Name = name;
     }
 }

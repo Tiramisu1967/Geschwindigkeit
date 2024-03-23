@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine.SceneManagement;
 
 [System.Serializable]
@@ -27,9 +26,9 @@ public class BaseCar : MonoBehaviour
 
     [HideInInspector] public Rigidbody rb;
 
-    [HideInInspector] public float motor = 1000;
-    [HideInInspector] public float steering = 0;
-    [HideInInspector] public float Break = 0;
+    public float motor = 1000;
+    public float steering = 0;
+    public float Break = 0;
 
 
 

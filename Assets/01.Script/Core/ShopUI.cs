@@ -2,33 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopUI : MonoBehaviour
 {
-    public int Page = 0;
-    public GameObject[] ShopPage;
+    public Canvas Shop;
+    public Canvas Main;
+    public int[] WheelCoin;
+    public int[] EngineCoin;
 
-    public void NextPage()
+    private void Start()
     {
-        switch (Page)
+        Main.gameObject.SetActive(false);
+    }
+
+    public void Wheelsale()
+    {
+        if(GameInstance.instance.Coin >= WheelCoin[GameInstance.instance.Part[1]] && GameInstance.instance.Part[1] != 3)
         {
-            case 0:
-                ShopPage[Page].SetActive(false);
-                Page = 1;
-                ShopPage[Page].SetActive(true); 
-                break;
-            case 1:
-                ShopPage[Page].SetActive(false);
-                Page = 0;
-                ShopPage[Page].SetActive(true);
-                break;
+            GameInstance.instance.Coin -= WheelCoin[GameInstance.instance.Part[1]];
+            GameInstance.instance.Part[1] += 1; 
         }
     }
 
-    public void Partsale(BasePart part)
+    public void Exit()
     {
-        if (part.Coin <= GameInstance.instance.Coin)
-            GameInstance.instance.Coin -= part.Coin;
-            part.GetPart();
+        Debug.Log("눌림");
+        if (GameInstance.instance.isClear)
+        {
+            GameInstance.instance.isClear = false;
+            Debug.Log("오 다음 스테이지");
+            Time.timeScale = 1;
+            SceneManager.LoadScene($"Stage{GameInstance.instance.Stage}");
+        } else
+        {
+            Debug.Log("진행");
+            Time.timeScale = 1;
+            Shop.gameObject.SetActive(false);
+        }
+    }
+
+    public void Enginesale()
+    {
+        if (GameInstance.instance.Coin >= EngineCoin[GameInstance.instance.Part[0]] && GameInstance.instance.Part[0] != 2)
+        {
+            GameInstance.instance.Coin -= EngineCoin[GameInstance.instance.Part[0]];
+            GameInstance.instance.Part[0] += 1;
+        }
     }
 }

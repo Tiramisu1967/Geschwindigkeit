@@ -5,16 +5,10 @@ using UnityEngine.Windows;
 
 public class CarMoveSystem : BaseCar
 {
-    [HideInInspector] public bool isSlow = false;
    public override void Movement()
     {
-        if (!isSlow)
-        {
-            motor = maxSteeringAngle * UnityEngine.Input.GetAxis("Horizontal") * 0.000005f;
-        }else
-        {
-            motor = maxMotorTorque * UnityEngine.Input.GetAxis("Vertical");
-        }
+        motor = maxMotorTorque * UnityEngine.Input.GetAxis("Vertical");
+        
         steering = maxSteeringAngle * UnityEngine.Input.GetAxis("Horizontal");
         Break = UnityEngine.Input.GetKey(KeyCode.Space) ? BreakForce : 0;
         base.Movement();
@@ -22,13 +16,10 @@ public class CarMoveSystem : BaseCar
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Rode"))
+        if (other.gameObject.CompareTag("Slow"))
         {
             Debug.Log("¿À...µÈ´Ù");
-            isSlow = true;
-        } else
-        {
-            isSlow = false;
+            motor = 100;
         }
     }
 
