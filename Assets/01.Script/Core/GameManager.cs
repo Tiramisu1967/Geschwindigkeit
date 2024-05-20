@@ -5,13 +5,5 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public void NextMap()
-    {
-        if(GameInstance.instance.Stage < 3)
-        {
-            GameInstance.instance.Stage += 1;
-        }
-        SceneManager.LoadScene($"Stage{GameInstance.instance.Stage}");
-    }
-
+    public static GameObject _player;
 }

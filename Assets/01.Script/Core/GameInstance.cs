@@ -16,6 +16,7 @@ public class GameInstance : MonoBehaviour
     public bool _IsTurn;
     public bool isClear;
     public int[] Part;
+    public int PartLaval;
 
     private void Awake()
     {

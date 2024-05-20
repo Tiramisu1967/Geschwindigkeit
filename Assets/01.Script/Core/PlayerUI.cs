@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerUI : MonoBehaviour
     public TextMeshProUGUI RacingTimeText;
     public TextMeshProUGUI LabText;
     public TextMeshProUGUI CoinText;
+    public TextMeshProUGUI ResultText;
     public RectTransform SpeedMeterneedle;
 
 
@@ -25,6 +27,13 @@ public class PlayerUI : MonoBehaviour
     public void CoinUpdate()
     {
         CoinText.text = $"Coin : {GameInstance.instance.Coin}$";
+    }
+
+    public IEnumerator Lose()
+    {
+        ResultText.text = $"your lose";
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene($"Stage{GameInstance.instance.Stage}");
     }
 
     public void RacingTimeManager()

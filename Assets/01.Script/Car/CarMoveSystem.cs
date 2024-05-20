@@ -1,6 +1,7 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
 
 public class CarMoveSystem : BaseCar
@@ -41,6 +42,7 @@ public class CarMoveSystem : BaseCar
                 GameInstance.instance._IsTurn = true;
                 WayIndex = 0;
                 TargetPoint = WayPoints.GetChild(WayIndex);
+                    
             }
         }
         GameInstance.instance.Speed = rb.velocity.magnitude * 3.6f;

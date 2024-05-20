@@ -9,7 +9,7 @@ public class Booster : BaseItme
     {
         Rigidbody CarRigid = Player.GetComponent<Rigidbody>();
 
-        CarRigid.AddForce(Player.transform.forward * Speed, ForceMode.Impulse);
+        CarRigid.velocity = CarRigid.transform.forward * Speed;
         base.Pick();
     }
 }

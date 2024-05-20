@@ -34,6 +34,7 @@ public class BaseCar : MonoBehaviour
 
     public void Start()
     {
+        WayIndex = 0;
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = center.localPosition;
 
